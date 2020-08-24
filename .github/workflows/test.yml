@@ -22,3 +22,8 @@ jobs:
           fetch-depth: 0
           submodules: true
           ref: ${{ matrix.ref }}
+      - name: Log ref
+        env:
+          REF: ${{ matrix.ref }}
+        shell: pwsh
+        run: Write-Host $env:REF

@@ -24,6 +24,6 @@ jobs:
           ref: ${{ matrix.ref }}
       - name: Log ref
         env:
-          REF: ${{ matrix.ref }}
+          REFXYZ: ${{ matrix.ref }}
         shell: pwsh
-        run: Write-Host $env:REF
+        run: Write-Host $env:REFXYZ

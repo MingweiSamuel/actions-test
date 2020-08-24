@@ -23,9 +23,9 @@ jobs:
         shell: pwsh
         env:
           ACTIONS_REFS_TEST: |
-            ${{ fromJson(
+            ${{ toJson(fromJson(
               ('schedule' == github.event_name)
               && '[ "refs/heads/release/2.x.x", "refs/heads/release/3.x.x" ]'
               || format('[ {0} ]', toJson(github.ref))
-            ) }}
+            )) }}
         run: Write-Host $env:ACTIONS_REFS_TEST

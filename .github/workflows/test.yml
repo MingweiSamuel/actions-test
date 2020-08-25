@@ -1,6 +1,11 @@
 name: CI
 on:
   workflow_dispatch:
+    inputs:
+      dispatchDeploy:
+        description: Deploy if there are changes? ('true')
+        required: true
+        default: 'true'
   push:
   schedule:
     - cron: '23 1 * * *'
@@ -17,14 +22,17 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: true
 
     steps:
+      - name: Log debug
+        env:
+          REFXYZ: ${{ matrix.ref }}
+          ACTION_DISPATCH_DEPLOY: ${{ github.event.inputs.dispatchDeploy }}
+        shell: pwsh
+        run: |
+          Write-Host $env:REFXYZ
+          Write-Host $env:ACTION_DISPATCH_DEPLOY
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
           submodules: true
           ref: ${{ matrix.ref }}
-      - name: Log ref
-        env:
-          REFXYZ: ${{ matrix.ref }}
-        shell: pwsh
-        run: Write-Host $env:REFXYZ

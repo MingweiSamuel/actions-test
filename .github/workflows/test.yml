@@ -30,6 +30,7 @@ jobs:
         run: |
           Write-Host $env:REFXYZ
           Write-Host $env:ACTION_DISPATCH_DEPLOY
+          Write-Error 'HELLO WORLD'
       - name: Checkout
         uses: actions/checkout@v2
         with:
